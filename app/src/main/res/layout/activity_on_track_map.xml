@@ -202,7 +202,7 @@
         style="@android:style/Widget.DeviceDefault.EditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="2dp"
         android:layout_marginStart="8dp"
         android:backgroundTint="@android:color/darker_gray"
         android:cursorVisible="false"
@@ -215,7 +215,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/splitMarker"
         app:layout_constraintTop_toBottomOf="@+id/costLbl"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginRight="2dp"
+        android:layout_marginLeft="8dp" />
 
     <TextView
         android:id="@+id/pickupTimeLbl"
@@ -223,7 +225,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/ic_watch"
         android:gravity="center_vertical"
         android:text="Pickup time"
@@ -231,14 +232,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/splitMarker"
-        app:layout_constraintTop_toBottomOf="@+id/costEditTxt"
+        app:layout_constraintTop_toTopOf="@+id/delivAddrLbl"
         app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/pickupTimeSpinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="2dp"
         android:layout_marginStart="8dp"
         android:spinnerMode="dialog"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -246,6 +247,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/splitMarker"
         app:layout_constraintTop_toBottomOf="@+id/pickupTimeLbl"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginRight="2dp"
+        android:layout_marginLeft="8dp" />
 
 </android.support.constraint.ConstraintLayout>
