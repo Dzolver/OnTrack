@@ -4,14 +4,16 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -21,13 +23,16 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import java.util.List;
+import java.util.Locale;
 
 public class OnTrackMap extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private Geocoder mGeo;
     private boolean mLocationPermissionGranted = false;
     private FusedLocationProviderClient mFusedProviderLocationClient;
     private static final CharSequence[] MAP_TYPE_ITEMS =
@@ -126,6 +131,7 @@ public class OnTrackMap extends FragmentActivity implements OnMapReadyCallback {
     }
     private void getDeviceLocation(){
         mFusedProviderLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        mGeo = new Geocoder(this, Locale.getDefault());
         try{
             Task location = mFusedProviderLocationClient.getLastLocation();
             location.addOnCompleteListener(new OnCompleteListener() {
@@ -134,6 +140,16 @@ public class OnTrackMap extends FragmentActivity implements OnMapReadyCallback {
                     if(task.isSuccessful()){
                         Log.d(TAG, "onComplete: found location!");
                         Location currentLocation = (Location) task.getResult();
+                        try {
+                            Log.d(TAG, "Lat/Lng = " + currentLocation.getLatitude() + ", " + currentLocation.getLongitude());
+                            List<Address> addressList = mGeo.getFromLocation(currentLocation.getLatitude(), currentLocation.getLongitude(), 1);
+                            TextView pickupAddrLbl = findViewById(R.id.pickupAddrLbl);
+                            pickupAddrLbl.append(addressList.get(0).getSubThoroughfare() + " " + addressList.get(0).getThoroughfare()+ ", " + addressList.get(0).getLocality());
+                        } catch (Exception e) {
+                            Log.e(TAG,"cannot retrieve address!");
+                            TextView pickupAddrLbl = findViewById(R.id.pickupAddrLbl);
+                            pickupAddrLbl.append("Address not found!");
+                        }
                         moveCamera(new LatLng(currentLocation.getLatitude()-0.0015,currentLocation.getLongitude()),DEFAULT_ZOOM);
                     }else{
                         Log.d(TAG,"onComplete: location found is null!");

@@ -32,7 +32,7 @@
         app:layout_constraintBottom_toTopOf="@+id/halfMarker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editAddrBtn"
+        app:layout_constraintTop_toTopOf="@+id/pickupAddrLbl"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -40,7 +40,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
-        android:text="The package will be picked up at this address: Inndalsveien 28"
+        android:text="The package will be picked up at this address: "
         android:textAlignment="center"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintBottom_toTopOf="@+id/halfMarker"
@@ -56,11 +56,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:backgroundTint="@color/colorPrimary"
+        android:gravity="center_vertical|center_horizontal|center"
         android:text="Edit Address"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintBottom_toTopOf="@+id/halfMarker"
-        app:layout_constraintEnd_toEndOf="parent"></Button>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pickupAddrLbl"></Button>
 
     <android.support.constraint.Guideline
         android:id="@+id/halfMarker"
